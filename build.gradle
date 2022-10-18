@@ -1,0 +1,27 @@
+plugins {
+    id 'scala'
+    id 'java'
+    id 'io.gatling.gradle' version '3.7.2'
+}
+
+group 'com.lance'
+version 'LC-1.0.0-SNAPSHOT'
+sourceCompatibility = 8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+dependencies {
+    gatling 'com.google.code.gson:gson:2.8.0'
+}
+
+gatling {
+
+    simulations = {
+        include "business/simulations/**/*.scala"
+    }
+}
+
+
+
