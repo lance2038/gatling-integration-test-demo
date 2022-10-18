@@ -34,6 +34,10 @@ case class CustomSessionCheckBaseAction(statsEngine: StatsEngine,
     // if check failed save the error message to log
     val message = if (status == KO) checkMsg else None
     ctx.coreComponents.statsEngine.logResponse(session.scenario, session.groups, resolvedName, start, end, status, None, message)
-    next ! session
+    if (status == KO) {
+      next ! session.markAsFailed
+    } else {
+      next ! session.markAsSucceeded
+    }
   }
 }
